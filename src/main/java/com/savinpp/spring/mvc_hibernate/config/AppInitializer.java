@@ -4,6 +4,7 @@ package com.savinpp.spring.mvc_hibernate.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
@@ -13,6 +14,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{WebConfig.class};
     }
+
 
     @Override
     protected String[] getServletMappings() {
