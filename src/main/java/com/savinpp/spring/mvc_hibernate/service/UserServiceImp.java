@@ -6,10 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private UserDao userDao;
@@ -34,7 +39,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void deleteUser(int id) {
-        userDao.deleteUser(id);
+    public void deleteUser(User user) {
+        entityManager.remove(entityManager.find(User.class, user.getId()));
     }
+
 }

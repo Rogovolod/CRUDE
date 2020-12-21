@@ -12,5 +12,5 @@ public interface UserDao {
 
     public User getUser(int id);
 
-    public void deleteUser(int id);
+    public void deleteUser(User user);
 }
