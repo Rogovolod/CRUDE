@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -39,14 +40,18 @@ public class WebConfig implements WebMvcConfigurer {
         this.applicationContext = applicationContext;
     }
 
+
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/view/");
         templateResolver.setSuffix(".html");
         return templateResolver;
     }
+
 
     @Bean
     public SpringTemplateEngine templateEngine() {
@@ -62,6 +67,7 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
         resolver.setCharacterEncoding("UTF-8");
+        resolver.setForceContentType(true);
         resolver.setContentType("text/html; charset=UTF-8");
     }
 

@@ -919,19 +919,23 @@ SELECT|sys.sys_config
       <Position>2</Position>
       <DataType>varchar(15)|0s</DataType>
     </column>
-    <column id="286" parent="283" name="surname">
+    <column id="286" parent="283" name="password">
       <Position>3</Position>
+      <DataType>varchar(10)|0s</DataType>
+    </column>
+    <column id="287" parent="283" name="surname">
+      <Position>4</Position>
       <DataType>varchar(25)|0s</DataType>
     </column>
-    <column id="287" parent="283" name="department">
-      <Position>4</Position>
+    <column id="288" parent="283" name="department">
+      <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="288" parent="283" name="salary">
-      <Position>5</Position>
+    <column id="289" parent="283" name="salary">
+      <Position>6</Position>
       <DataType>int|0s</DataType>
     </column>
-    <key id="289" parent="283" name="PRIMARY">
+    <key id="290" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

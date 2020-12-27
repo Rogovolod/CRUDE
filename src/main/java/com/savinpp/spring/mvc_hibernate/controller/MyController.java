@@ -38,16 +38,15 @@ public class MyController {
     }
 
     @RequestMapping("/updateInfo/{id}")
-    public String updateUser(@PathVariable("id") @RequestParam("userId") int id, Model model) {
+    public String updateUser(@PathVariable("id") int id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
         return "user-info";
     }
 
     @RequestMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") @RequestParam("userId") int id) {
+    public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(userService.getUser(id));
         return "redirect:/";
     }
-
 }
