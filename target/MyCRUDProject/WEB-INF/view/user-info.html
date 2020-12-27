@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<h2>User Info</h2>
+<br>
+
+<form th:action="@{/saveUser}" modelAttribute="user">
+
+    <th:hidden path="id"/>
+
+    Name <th: path="name"/>
+    <br><br>
+    Surname <th:input path="surname"/>
+    <br><br>
+    Department <th:input path="department"/>
+    <br><br>
+    Salary <th:input path="salary"/>
+    <br><br>
+    <input type="submit" value="Save">
+
+</form>
+
+
+
+</body>
+
+</html>

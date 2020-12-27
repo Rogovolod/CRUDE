@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+
+
+<table width="30%" border="1" cellpadding="1" bgcolor="#F0F8FF">
+    <tr align="center">
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Operations</th>
+    </tr>
+
+    <tr th:each="usr: ${allUsers}">
+
+        <th th:text="${usr.name}">name</th>
+        <th th:text="${usr.surname}">surname</th>
+        <th th:text="${usr.department}">department</th>
+        <th th:text="${usr.salary}">salary</th>
+
+
+        <th>
+
+            <url var="updateButton" value="/updateInfo">
+                <param name="userId" value="${usr.id}"/>
+            </url>
+
+            <url var="deleteButton" value="/deleteUser">
+                <param name="userId" value="${usr.id}"/>
+            </url>
+
+
+
+            <input type="button" value="Update"
+                   onclick="'window.location.href = \'' + @{/updateInfo/{id} (id =${usr.id})} + '\''"/>
+
+            <input type="button" value="Update"
+                   onclick="window.location.href = '${updateButton}'"/>
+
+<!--    onclick="'window.location.href = \'' + @{/deviceevent/list/{id}(id=${deviceEvent.id})} + '\''"-->
+
+<!--            <input type="button" value="Delete"-->
+<!--                   onclick="window.location.href = '${deleteButton}'"/>-->
+
+            <a class="btn btn-primary" th:href="@{/deleteUser/{userId}(userId = ${usr.id})}">Delete</a>
+
+    </tr>
+</table>
+
+<br>
+
+<input type="button" value="Add"
+       onclick="window.location.href = 'addNewUser'"/>
+
+
+
+</body>
+</html>
