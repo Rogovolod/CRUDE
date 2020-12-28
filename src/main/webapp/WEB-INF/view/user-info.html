@@ -4,21 +4,33 @@
 <body>
 <h2>Информация о пользователе</h2>
 <br>
-<form th:action="@{/saveUser}" th:object="${user}" method="post">
+<!--<form th:action="@{/saveUser}" th:object="${user}">
 
-    <input class="form-control" type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{id}"/>
     <p>Имя: <label>
-        <input class="form-control" type="text" th:field="*{name}"/>
+        <input type="text" th:field="*{name}"/>
     </label></p>
     <p>Фамилия: <label>
-        <input class="form-control" type="text" th:field="*{surname}"/>
+        <input type="text" th:field="*{surname}"/>
     </label></p>
     <p>Департамент: <label>
-        <input class="form-control" type="text" th:field="*{department}"/>
+        <input type="text" th:field="*{department}"/>
     </label></p>
     <p>Зарплата: <label>
-        <input class="form-control" type="text" th:field="*{salary}"/>
+        <input type="text" th:field="*{salary}"/>
     </label></p>
+    <button type="submit" class="btn btn-success">Сохранить</button>
+</form>-->
+<form th:action="@{/saveUser}" th:object="${user}">
+    <input type="hidden" th:field="*{id}"/>
+    Имя <input type="text" th:field="*{name}"/>
+    <br><br>
+    Фамилия <input type="text" th:field="*{surname}"/>
+    <br><br>
+    Департамент <input type="text" th:field="*{department}"/>
+    <br><br>
+    Зарплата <input type="text" th:field="*{salary}"/>
+    <br><br>
     <button type="submit" class="btn btn-success">Сохранить</button>
 </form>
 </body>
