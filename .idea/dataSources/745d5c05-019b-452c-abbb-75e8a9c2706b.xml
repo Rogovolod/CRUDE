@@ -908,37 +908,68 @@ SELECT|sys.sys_config
       <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,RELOAD,SHUTDOWN,PROCESS,FILE,REFERENCES,INDEX,ALTER,SHOW DATABASES,SUPER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,REPLICATION SLAVE,REPLICATION CLIENT,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,CREATE USER,EVENT,TRIGGER,CREATE TABLESPACE,CREATE ROLE,DROP ROLE!
 </ObjectGrants>
     </user>
-    <table id="283" parent="3" name="users"/>
-    <column id="284" parent="283" name="id">
+    <table id="283" parent="3" name="roles"/>
+    <table id="284" parent="3" name="users"/>
+    <column id="285" parent="283" name="login">
+      <Position>1</Position>
+      <DataType>varchar(30)|0s</DataType>
+    </column>
+    <column id="286" parent="283" name="authority">
+      <Position>2</Position>
+      <DataType>varchar(25)|0s</DataType>
+    </column>
+    <index id="287" parent="283" name="login">
+      <ColNames>login</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="288" parent="283" name="roles_ibfk_1">
+      <ColNames>login</ColNames>
+      <RefTableName>users</RefTableName>
+      <RefColNames>login</RefColNames>
+    </foreign-key>
+    <column id="289" parent="284" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="285" parent="283" name="name">
+    <column id="290" parent="284" name="name">
       <Position>2</Position>
-      <DataType>varchar(15)|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
     </column>
-    <column id="286" parent="283" name="password">
+    <column id="291" parent="284" name="surname">
       <Position>3</Position>
-      <DataType>varchar(10)|0s</DataType>
-    </column>
-    <column id="287" parent="283" name="surname">
-      <Position>4</Position>
       <DataType>varchar(25)|0s</DataType>
     </column>
-    <column id="288" parent="283" name="department">
-      <Position>5</Position>
+    <column id="292" parent="284" name="department">
+      <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="289" parent="283" name="salary">
-      <Position>6</Position>
+    <column id="293" parent="284" name="salary">
+      <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <key id="290" parent="283" name="PRIMARY">
+    <column id="294" parent="284" name="password">
+      <Position>6</Position>
+      <DataType>varchar(20)|0s</DataType>
+    </column>
+    <column id="295" parent="284" name="login">
+      <Position>7</Position>
+      <DataType>varchar(20)|0s</DataType>
+    </column>
+    <index id="296" parent="284" name="users_login_uindex">
+      <ColNames>login</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="297" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="298" parent="284" name="users_login_uindex">
+      <ColNames>login</ColNames>
+      <UnderlyingIndexName>users_login_uindex</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

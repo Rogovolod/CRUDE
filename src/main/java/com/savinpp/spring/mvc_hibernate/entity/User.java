@@ -24,16 +24,39 @@ public class User {
     @Column(name = "salary")
     private int salary;
 
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public User() {
     }
 
-    public User(int id, String name, String surname, String department, int salary, int password, int login, int role) {
+    public User(int id, String name, String surname, String department, int salary, String password, String login) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.department = department;
         this.salary = salary;
+        this.login = login;
+        this.password = password;
     }
 
     public int getId() {
@@ -84,6 +107,8 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", department='" + department + '\'' +
                 ", salary=" + salary +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

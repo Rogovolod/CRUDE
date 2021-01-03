@@ -14,6 +14,8 @@
         <th>Фамилия</th>
         <th>Департамент</th>
         <th>Зарплата</th>
+        <th>Логин</th>
+        <th>Пароль</th>
         <th>Операции</th>
     </tr>
 
@@ -23,6 +25,8 @@
         <td th:text="${usr.surname}">surname</td>
         <td th:text="${usr.department}">department</td>
         <td th:text="${usr.salary}">salary</td>
+        <td th:text="${usr.login}">login</td>
+        <td th:text="${usr.password}">password</td>
         <td>
            <input type="button" value="Изменить"
                    th:onclick="'window.location.href = \'' + @{/updateInfo/{id} (id =${usr.id})} + '\''"/>
