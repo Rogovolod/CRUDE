@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<h2>Информация о пользователе</h2>
+<br>
+<!--<form th:action="@{/saveUser}" th:object="${user}">
+
+    <input type="hidden" th:field="*{id}"/>
+    <p>Имя: <label>
+        <input type="text" th:field="*{name}"/>
+    </label></p>
+    <p>Фамилия: <label>
+        <input type="text" th:field="*{surname}"/>
+    </label></p>
+    <p>Департамент: <label>
+        <input type="text" th:field="*{department}"/>
+    </label></p>
+    <p>Зарплата: <label>
+        <input type="text" th:field="*{salary}"/>
+    </label></p>
+    <button type="submit" class="btn btn-success">Сохранить</button>
+</form>-->
+<form th:action="@{/saveUser}" th:object="${user}">
+    <input type="hidden" th:field="*{id}"/>
+    Имя <input type="text" th:field="*{name}"/>
+    <br><br>
+    Фамилия <input type="text" th:field="*{surname}"/>
+    <br><br>
+    Департамент <input type="text" th:field="*{department}"/>
+    <br><br>
+    Зарплата <input type="text" th:field="*{salary}"/>
+    <br><br>
+    Логин <input type="text" th:field="*{login}"/>
+    <br><br>
+    Пароль <input type="text" th:field="*{password}"/>
+    <br><br>
+    <button type="submit" class="btn btn-success">Сохранить</button>
+</form>
+</body>
+</html>

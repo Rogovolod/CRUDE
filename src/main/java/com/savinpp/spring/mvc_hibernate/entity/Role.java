@@ -1,35 +1,53 @@
 package com.savinpp.spring.mvc_hibernate.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
+
+import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @Column(name = "login")
     private String login;
 
-    @Column(name = "authority")
-    private String authority;
+    @Column(name = "role")
+    private String role;
+
+    @Transient
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> user;
+
+
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
 
     public Role() {
     }
 
-    public Role(String login, String authority) {
+    public Role(String login, String role) {
         this.login = login;
-        this.authority = authority;
+        this.role = role;
     }
 
+    @Override
     public String getAuthority() {
-        return authority;
+        return role;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String authority) {
+        this.role = authority;
     }
 
     public void setLogin(String login) {
@@ -44,7 +62,15 @@ public class Role {
     public String toString() {
         return "Role{" +
                 "login='" + login + '\'' +
-                ", authority='" + authority + '\'' +
+                ", authority='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() == Role.class) {
+            return login.equals( ( (Role) obj).role ) && role.equals( ( (Role) obj).role);
+        }
+        return false;
     }
 }

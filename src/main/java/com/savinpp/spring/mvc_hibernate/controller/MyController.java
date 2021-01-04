@@ -1,24 +1,26 @@
 package com.savinpp.spring.mvc_hibernate.controller;
 
+import com.savinpp.spring.mvc_hibernate.entity.Role;
 import com.savinpp.spring.mvc_hibernate.entity.User;
 import com.savinpp.spring.mvc_hibernate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
+@RequestMapping("/admin")
 public class MyController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @GetMapping
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
@@ -34,7 +36,7 @@ public class MyController {
     @RequestMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @RequestMapping("/updateInfo/{id}")
@@ -47,6 +49,7 @@ public class MyController {
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(userService.getUser(id));
-        return "redirect:/";
+        return "redirect:/admin";
     }
+
 }

@@ -1,11 +1,16 @@
 package com.savinpp.spring.mvc_hibernate.entity;
 
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "login")})
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -38,8 +43,44 @@ public class User {
         this.login = login;
     }
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "join_table", joinColumns = @JoinColumn(name = "users_login"),
+            inverseJoinColumns = @JoinColumn(name = "roles_login"))
+    private Set<Role> roles;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -49,7 +90,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String surname, String department, int salary, String password, String login) {
+    public User(int id, String name, String surname, String department, int salary, String password, String login, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -57,6 +98,7 @@ public class User {
         this.salary = salary;
         this.login = login;
         this.password = password;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -97,6 +139,14 @@ public class User {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
