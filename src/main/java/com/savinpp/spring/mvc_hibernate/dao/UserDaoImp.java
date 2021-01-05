@@ -29,6 +29,12 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
+    public void saveRole(Role role) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(role);
+    }
+
+    @Override
     public User getUser(int id) {
         User user = entityManager.find(User.class, id);
         return user;

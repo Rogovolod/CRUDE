@@ -46,6 +46,11 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
+    public void saveRole(Role role) {
+        userDao.saveRole(role);
+    }
+
+    @Override
     @Transactional
     public User getUser(int id) {
         return userDao.getUser(id);

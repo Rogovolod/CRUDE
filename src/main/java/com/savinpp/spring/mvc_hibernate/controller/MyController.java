@@ -26,30 +26,46 @@ public class MyController {
         model.addAttribute("allUsers", allUsers);
         return "all-users";
     }
-    @RequestMapping("/addNewUser")
+
+    @GetMapping("/addNewUser")
     public String addNewUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "user-info";
     }
 
-    @RequestMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    @GetMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") User user,@ModelAttribute("role") Role role) {
         userService.saveUser(user);
+        userService.saveRole(role);
         return "redirect:/admin";
     }
 
-    @RequestMapping("/updateInfo/{id}")
+    @GetMapping("/saveRole")
+    public String saveRole(@ModelAttribute("role") Role role) {
+        userService.saveRole(role);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/updateInfo/{id}")
     public String updateUser(@PathVariable("id") int id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
         return "user-info";
     }
 
-    @RequestMapping("/deleteUser/{id}")
+    @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(userService.getUser(id));
         return "redirect:/admin";
+    }
+
+    private Set<Role> getAddRole (String[] role) {
+        Set<Role> roleSet=new HashSet<>();
+        for (int i=0; i<role.length; i++) {
+            roleSet.add(userService.getRoleByName(role[i]));
+        }
+        return roleSet;
     }
 
 }

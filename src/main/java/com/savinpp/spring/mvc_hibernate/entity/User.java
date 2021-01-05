@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -43,9 +44,19 @@ public class User implements UserDetails {
         this.login = login;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+/*    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "join_table", joinColumns = @JoinColumn(name = "users_login"),
             inverseJoinColumns = @JoinColumn(name = "roles_login"))
+    private Set<Role> roles;*/
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "join_table",
+            joinColumns =
+            @JoinColumn(name = "users_login", referencedColumnName = "login"),
+            inverseJoinColumns =
+            @JoinColumn(name = "roles_login", referencedColumnName = "login"))
+
     private Set<Role> roles;
 
     @Override

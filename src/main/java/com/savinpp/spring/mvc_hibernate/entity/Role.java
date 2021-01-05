@@ -62,7 +62,7 @@ public class Role implements GrantedAuthority {
     public String toString() {
         return "Role{" +
                 "login='" + login + '\'' +
-                ", authority='" + role + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 

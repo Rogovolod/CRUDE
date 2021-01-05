@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <meta charset="UTF-8">
-<body>
-<h2>Информация о пользователе</h2>
-<br>
-<!--<form th:action="@{/saveUser}" th:object="${user}">
+<title>Редактирование пользователя</title>
 
-    <input type="hidden" th:field="*{id}"/>
-    <p>Имя: <label>
-        <input type="text" th:field="*{name}"/>
-    </label></p>
-    <p>Фамилия: <label>
-        <input type="text" th:field="*{surname}"/>
-    </label></p>
-    <p>Департамент: <label>
-        <input type="text" th:field="*{department}"/>
-    </label></p>
-    <p>Зарплата: <label>
-        <input type="text" th:field="*{salary}"/>
-    </label></p>
-    <button type="submit" class="btn btn-success">Сохранить</button>
-</form>-->
-<form th:action="@{/saveUser}" th:object="${user}">
-    <input type="hidden" th:field="*{id}"/>
-    Имя <input type="text" th:field="*{name}"/>
-    <br><br>
-    Фамилия <input type="text" th:field="*{surname}"/>
-    <br><br>
-    Департамент <input type="text" th:field="*{department}"/>
-    <br><br>
-    Зарплата <input type="text" th:field="*{salary}"/>
-    <br><br>
-    Логин <input type="text" th:field="*{login}"/>
-    <br><br>
-    Пароль <input type="text" th:field="*{password}"/>
+<body>
+<h2 align="center">Информация о пользователе:</h2>
+<br>
+
+<div align="center">
+<form th:action="@{/admin/saveRole}" th:object="${role}">
+    <table>
+        <input type="hidden" th:field="*{id}"/>
+        <tr>
+            <td>Имя</td> <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Фамилия</td> <td><input type="text" th:field="*{surname}"/></td>
+        <tr>
+            <td>Департамент</td> <td><input type="text" th:field="*{department}"/></td>
+        </tr>
+        <tr>
+            <td>Зарплата</td> <td><input type="text" th:field="*{salary}"/></td>
+        </tr>
+        <tr>
+            <td>Логин</td> <td><input type="text" th:field="*{login}"/></td>
+        </tr>
+        <tr>
+            <td>Пароль</td> <td><input type="password" th:field="*{password}"/></td>
+        </tr>
+        <td>Права</td>
+        <td> <input type="text" th:field="*{roles}"/>
+    </td>
+        </tr>
+
+    </table>
     <br><br>
     <button type="submit" class="btn btn-success">Сохранить</button>
 </form>
+</div>
 </body>
 </html>
+
+
+
+
+
+

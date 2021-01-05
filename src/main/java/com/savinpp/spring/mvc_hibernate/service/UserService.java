@@ -12,10 +12,12 @@ public interface UserService {
 
     public List<User> getAllUsers();
     public void saveUser(User user);
+    public void saveRole(Role role);
     public User getUser(int id);
     public void deleteUser(User user);
     public User showUserByUsername(String username);
     public Role getRoleByName(String name);
     public List<Role> listRoles();
     public User show (int id);
+
 }
