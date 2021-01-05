@@ -18,18 +18,18 @@ public class UserController {
 
     @GetMapping
     public String getHomePage() {
-            return "home";
-        }
+        return "home";
+    }
 
     @GetMapping("/welcome")
     public String forOtherRoles() {
-            return "welcome";
-        }
+        return "welcome";
+    }
 
     @GetMapping("/user")
     public String clickMe(Model model, Principal principal) {
         model.addAttribute("oneUser", userService.showUserByUsername(principal.getName()));
         return "show-me";
     }
-    }
+}
 

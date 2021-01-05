@@ -911,85 +911,99 @@ SELECT|sys.sys_config
     <table id="283" parent="3" name="join_table"/>
     <table id="284" parent="3" name="roles"/>
     <table id="285" parent="3" name="users"/>
-    <column id="286" parent="283" name="roles_login">
+    <column id="286" parent="283" name="users_id">
       <Position>1</Position>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="287" parent="283" name="users_login">
+    <column id="287" parent="283" name="roles_id">
       <Position>2</Position>
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
-    <index id="288" parent="283" name="roles_login">
-      <ColNames>roles_login</ColNames>
+    <index id="288" parent="283" name="users_id">
+      <ColNames>users_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="289" parent="283" name="users_login">
-      <ColNames>users_login</ColNames>
+    <index id="289" parent="283" name="roles_id">
+      <ColNames>roles_id</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="290" parent="283" name="join_table_ibfk_2">
-      <ColNames>roles_login</ColNames>
-      <RefTableName>roles</RefTableName>
-      <RefColNames>login</RefColNames>
-    </foreign-key>
-    <foreign-key id="291" parent="283" name="join_table_ibfk_1">
-      <ColNames>users_login</ColNames>
+    <foreign-key id="290" parent="283" name="join_table_ibfk_1">
+      <ColNames>users_id</ColNames>
       <RefTableName>users</RefTableName>
-      <RefColNames>login</RefColNames>
+      <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="292" parent="284" name="login">
+    <foreign-key id="291" parent="283" name="join_table_ibfk_2">
+      <ColNames>roles_id</ColNames>
+      <RefTableName>roles</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="292" parent="284" name="id">
       <Position>1</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
     <column id="293" parent="284" name="role">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <index id="294" parent="284" name="login">
-      <ColNames>login</ColNames>
+    <index id="294" parent="284" name="role_id_uindex">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <column id="295" parent="285" name="id">
+    <key id="295" parent="284" name="role_id_uindex">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>role_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="296" parent="285" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="296" parent="285" name="name">
+    <column id="297" parent="285" name="name">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
     </column>
-    <column id="297" parent="285" name="surname">
+    <column id="298" parent="285" name="surname">
       <Position>3</Position>
       <DataType>varchar(25)|0s</DataType>
     </column>
-    <column id="298" parent="285" name="department">
+    <column id="299" parent="285" name="department">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="299" parent="285" name="salary">
+    <column id="300" parent="285" name="salary">
       <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="300" parent="285" name="password">
+    <column id="301" parent="285" name="password">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="301" parent="285" name="login">
+    <column id="302" parent="285" name="login">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <index id="302" parent="285" name="users_login_uindex">
+    <index id="303" parent="285" name="users_id_uindex">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="304" parent="285" name="users_login_uindex">
       <ColNames>login</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="303" parent="285" name="PRIMARY">
+    <key id="305" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="304" parent="285" name="users_login_uindex">
+    <key id="306" parent="285" name="users_id_uindex">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>users_id_uindex</UnderlyingIndexName>
+    </key>
+    <key id="307" parent="285" name="users_login_uindex">
       <ColNames>login</ColNames>
       <UnderlyingIndexName>users_login_uindex</UnderlyingIndexName>
     </key>

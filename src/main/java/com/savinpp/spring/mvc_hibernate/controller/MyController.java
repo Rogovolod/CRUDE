@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -21,42 +19,45 @@ public class MyController {
     private UserService userService;
 
     @GetMapping
-    public String showAllUsers(Model model) {
-        List<User> allUsers = userService.getAllUsers();
-        model.addAttribute("allUsers", allUsers);
-        return "all-users";
+    public String showAll(Model model) {
+        model.addAttribute("index", userService.index());
+        System.out.println(userService.index());
+        return "index";
     }
 
-    @GetMapping("/addNewUser")
-    public String addNewUser(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "user-info";
+    @GetMapping("/add")
+    public String getUser(Model model) {
+        model.addAttribute("listRole", userService.listRoles());
+        return "add";
     }
 
-    @GetMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user,@ModelAttribute("role") Role role) {
-        userService.saveUser(user);
-        userService.saveRole(role);
+    @PostMapping("/add")
+    public String add(@ModelAttribute("addUser") User user,
+                      @RequestParam(value = "newRole", required = false) String[] role) {
+        user.setRoles(getAddRole(role));
+        userService.save(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/saveRole")
-    public String saveRole(@ModelAttribute("role") Role role) {
-        userService.saveRole(role);
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.show(id));
+        model.addAttribute("listRole", userService.listRoles());
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String update(@ModelAttribute("user") User user,
+                         @RequestParam(value = "newRole", required = false) String[] role) {
+        user.setRoles(getAddRole(role));
+        userService.update(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/updateInfo/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
-        User user = userService.getUser(id);
-        model.addAttribute("user", user);
-        return "user-info";
-    }
-
-    @GetMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(userService.getUser(id));
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id) {
+        User user=userService.show(id);
+        userService.delete(user);
         return "redirect:/admin";
     }
 
@@ -67,5 +68,4 @@ public class MyController {
         }
         return roleSet;
     }
-
 }

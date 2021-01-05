@@ -7,20 +7,65 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "roles")
+@Table (name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
-    @Column(name = "login")
-    private String login;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @Column(name = "role")
+    @Column
     private String role;
 
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> user;
 
+    public Role(int id, String role) {
+        this.id = id;
+        this.role = role;
+    }
+
+    public Role() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id);
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String getAuthority() {
+
+        return role;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                '}';
+    }
 
     public Set<User> getUser() {
         return user;
@@ -28,49 +73,5 @@ public class Role implements GrantedAuthority {
 
     public void setUser(Set<User> user) {
         this.user = user;
-    }
-
-    public Role() {
-    }
-
-    public Role(String login, String role) {
-        this.login = login;
-        this.role = role;
-    }
-
-    @Override
-    public String getAuthority() {
-        return role;
-    }
-
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String authority) {
-        this.role = authority;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "login='" + login + '\'' +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj.getClass() == Role.class) {
-            return login.equals( ( (Role) obj).role ) && role.equals( ( (Role) obj).role);
-        }
-        return false;
     }
 }

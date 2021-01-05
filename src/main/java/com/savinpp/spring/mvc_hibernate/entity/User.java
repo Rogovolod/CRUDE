@@ -44,18 +44,13 @@ public class User implements UserDetails {
         this.login = login;
     }
 
-/*    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "join_table", joinColumns = @JoinColumn(name = "users_login"),
-            inverseJoinColumns = @JoinColumn(name = "roles_login"))
-    private Set<Role> roles;*/
-
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "join_table",
             joinColumns =
-            @JoinColumn(name = "users_login", referencedColumnName = "login"),
+            @JoinColumn(name = "users_id", referencedColumnName = "id"),
             inverseJoinColumns =
-            @JoinColumn(name = "roles_login", referencedColumnName = "login"))
+            @JoinColumn(name = "roles_id", referencedColumnName = "id"))
 
     private Set<Role> roles;
 
